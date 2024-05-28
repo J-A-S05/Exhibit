@@ -25,7 +25,7 @@ import {
   import { useDispatch, useSelector } from "react-redux";
   import { setPosts } from "state";
   
-  const MyPostWidget = ({ picturePath }) => {
+  const MyPostWidget = ({ userId , picturePath }) => {
     const dispatch = useDispatch();
     const [isImage, setIsImage] = useState(false);
     const [image, setImage] = useState(null);
@@ -36,8 +36,10 @@ import {
     const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
     const mediumMain = palette.neutral.mediumMain;
     const medium = palette.neutral.medium;
+    const [file , setFile] = useState("");
   
     const handlePost = async () => {
+      console.log(userId);
       const formData = new FormData();
       formData.append("userId", _id);
       formData.append("description", post);
@@ -94,24 +96,39 @@ import {
                     width="100%"
                     sx={{ "&:hover": { cursor: "pointer" } }}
                   >
-                    <input {...getInputProps()} />
+                    <input {...getInputProps()}/>
                     {!image ? (
+                      
                       <p>Add Image Here</p>
                     ) : (
-                      <FlexBetween>
-                        <Typography>{image.name}</Typography>
+                      <>
+                        <img
+            width="100%"
+            height="auto"
+            alt="post"
+            style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }}
+            src={URL.createObjectURL(image)} 
+          />
                         <EditOutlined />
-                      </FlexBetween>
+                        <IconButton
+                      onClick={() => setImage(null)}
+                      sx={{ width: "15%" }}
+                    >
+                      <DeleteOutlined />
+                    </IconButton>
+                      </>
                     )}
                   </Box>
-                  {image && (
+                  {/* {image && (
+                    <>
                     <IconButton
                       onClick={() => setImage(null)}
                       sx={{ width: "15%" }}
                     >
                       <DeleteOutlined />
                     </IconButton>
-                  )}
+                    </>
+                  )} */}
                 </FlexBetween>
               )}
             </Dropzone>

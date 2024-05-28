@@ -5,8 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { setFriends } from "state";
 import FlexBetween from "./FlexBetween";
 import UserImage from "./UserImage";
+// import zIndex from "@mui/material/styles/zIndex";
 
-const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
+const Friend = ({ friendId, name, subtitle, userPicturePath , isPost , isOnline}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { _id } = useSelector((state) => state.user);
@@ -20,6 +21,18 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   const medium = palette.neutral.medium;
 
   const isFriend = friends.find((friend) => friend._id === friendId);
+
+  const onlineStatusStyle = {
+    position: 'relative',
+    bottom: '-1.2rem',
+    right: '2rem',
+    width: '14px',
+    height: '14px',
+    backgroundColor: isOnline ? 'lime' : 'grey',
+    border: '2px solid white',
+    borderRadius: '50%',
+    zIndex : '99',
+  };
 
   const patchFriend = async () => {
     const response = await fetch(
@@ -40,6 +53,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
     <FlexBetween>
       <FlexBetween gap="1rem">
         <UserImage image={userPicturePath} size="55px" />
+        {!isPost && <span style={onlineStatusStyle} ></span>}
         <Box
           onClick={() => {
             navigate(`/profile/${friendId}`);
@@ -61,10 +75,11 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
           </Typography>
           <Typography color={medium} fontSize="0.75rem">
             {subtitle}
+            {/* {isOnline ? "Online" : "Offline"} */}
           </Typography>
         </Box>
       </FlexBetween>
-      <IconButton
+      {friendId !== _id && <IconButton
         onClick={() => patchFriend()}
         sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
       >
@@ -73,7 +88,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
         ) : (
           <PersonAddOutlined sx={{ color: primaryDark }} />
         )}
-      </IconButton>
+      </IconButton>}
     </FlexBetween>
   );
 };

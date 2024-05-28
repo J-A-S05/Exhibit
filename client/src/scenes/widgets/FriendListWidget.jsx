@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setFriends } from "state";
 
-const FriendListWidget = ({ userId }) => {
+const FriendListWidget = ({ userId , onlineUsers}) => {
   const dispatch = useDispatch();
   const { palette } = useTheme();
   const token = useSelector((state) => state.token);
@@ -21,6 +21,7 @@ const FriendListWidget = ({ userId }) => {
     );
     const data = await response.json();
     dispatch(setFriends({ friends: data }));
+    console.log(data)
   };
 
   useEffect(() => {
@@ -39,13 +40,23 @@ const FriendListWidget = ({ userId }) => {
       </Typography>
       <Box display="flex" flexDirection="column" gap="1.5rem">
         {friends.map((friend) => (
-          <Friend
+          onlineUsers.some(matchElement => matchElement.userId === friend._id) ? <Friend
             key={friend._id}
             friendId={friend._id}
             name={`${friend.firstName} ${friend.lastName}`}
             subtitle={friend.occupation}
             userPicturePath={friend.picturePath}
-          />
+            isPost = {false}
+            isOnline = {true}
+          /> : <Friend
+          key={friend._id}
+          friendId={friend._id}
+          name={`${friend.firstName} ${friend.lastName}`}
+          subtitle={friend.occupation}
+          userPicturePath={friend.picturePath}
+          isPost = {false}
+          isOnline = {false}
+        /> 
         ))}
       </Box>
     </WidgetWrapper>

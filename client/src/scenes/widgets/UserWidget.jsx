@@ -3,8 +3,9 @@ import {
   EditOutlined,
   LocationOnOutlined,
   WorkOutlineOutlined,
+  PersonAddOutlined,
 } from "@mui/icons-material";
-import { Box, Typography, Divider, useTheme } from "@mui/material";
+import { Box, Typography, Divider, useTheme, IconButton } from "@mui/material";
 import UserImage from "components/UserImage";
 import FlexBetween from "components/FlexBetween";
 import WidgetWrapper from "components/WidgetWrapper";
@@ -17,9 +18,11 @@ const UserWidget = ({ userId, picturePath }) => {
   const { palette } = useTheme();
   const navigate = useNavigate();
   const token = useSelector((state) => state.token);
+  const {_id} = useSelector((state) => state.user);
   const dark = palette.neutral.dark;
   const medium = palette.neutral.medium;
   const main = palette.neutral.main;
+  const primaryDark = palette.primary.dark;
 
   const getUser = async () => {
     const response = await fetch(`http://localhost:8000/users/${userId}`, {
@@ -28,6 +31,7 @@ const UserWidget = ({ userId, picturePath }) => {
     });
     const data = await response.json();
     setUser(data);
+    console.log(data)
   };
 
   useEffect(() => {
@@ -75,7 +79,11 @@ const UserWidget = ({ userId, picturePath }) => {
             <Typography color={medium}>{friends.length} friends</Typography>
           </Box>
         </FlexBetween>
-        <ManageAccountsOutlined />
+        <IconButton  onClick = {() => console.log("manage accounts clicked")} >
+
+        {userId === _id ? <ManageAccountsOutlined/> : <PersonAddOutlined sx={{ color: primaryDark }} />}
+        {/* <ManageAccountsOutlined/> */}
+        </IconButton>
       </FlexBetween>
 
       <Divider />
@@ -128,7 +136,7 @@ const UserWidget = ({ userId, picturePath }) => {
               <Typography color={medium}>Social Network</Typography>
             </Box>
           </FlexBetween>
-          <EditOutlined sx={{ color: main }} />
+          {userId === _id && <EditOutlined sx={{ color: main }} />}
         </FlexBetween>
 
         <FlexBetween gap="1rem">
@@ -141,7 +149,7 @@ const UserWidget = ({ userId, picturePath }) => {
               <Typography color={medium}>Network Platform</Typography>
             </Box>
           </FlexBetween>
-          <EditOutlined sx={{ color: main }} />
+          {userId === _id && <EditOutlined sx={{ color: main }} />}
         </FlexBetween>
       </Box>
     </WidgetWrapper>
