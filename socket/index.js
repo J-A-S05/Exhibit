@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 const PORT = process.env.PORT;
-const FRONTEND_URL = process.env.FRONTEND_URL;
+const FRONTEND_URL = process.env.FRONTEND_URL || "https://exhibit-app-frontend.vercel.app";
 const io = require("socket.io")(PORT, {
     cors: {
       origin: FRONTEND_URL,
