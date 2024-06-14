@@ -50,7 +50,7 @@ const PostWidget = ({
   const primary = palette.primary.main;
 
   const patchLike = async () => {
-    const response = await fetch(`http://localhost:8000/posts/${postId}/like`, {
+    const response = await fetch(`https://exhibit-server.vercel.app//posts/${postId}/like`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -63,7 +63,7 @@ const PostWidget = ({
   };
 
   const sendMessage = async () => {
-    const user = await fetch(`http://localhost:8000/users/${loggedInUserId}`, {
+    const user = await fetch(`https://exhibit-server.vercel.app//users/${loggedInUserId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -71,7 +71,7 @@ const PostWidget = ({
     const userData = await user.json();
 
     const response = await fetch(
-      `http://localhost:8000/posts/${postId}/comment`,
+      `https://exhibit-server.vercel.app//posts/${postId}/comment`,
       {
         method: "PATCH",
         headers: {
@@ -119,7 +119,7 @@ const PostWidget = ({
           height="auto"
           alt="post"
           style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }}
-          src={`http://localhost:8000/assets/${picturePath}`}
+          src={`https://exhibit-server.vercel.app//assets/${picturePath}`}
         />
       )}
       <FlexBetween mt="0.25rem">

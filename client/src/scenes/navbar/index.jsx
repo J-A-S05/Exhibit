@@ -52,7 +52,7 @@ const Navbar = () => {
   const handleSearchClick = async () => {
     const arr = text.split(" ")
     const username = arr[0] + '_' + arr[1];
-    const response = await fetch(`http://localhost:8000/users/${username}/byusername` , {
+    const response = await fetch(`https://exhibit-server.vercel.app//users/${username}/byusername` , {
       method : "GET",
       headers : {Authorization: `Bearer ${token}`}
     });

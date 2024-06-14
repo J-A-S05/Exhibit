@@ -22,7 +22,7 @@ const AllConvosWidget = ({userId , onlineUsers}) => {
   const getFriends = async () => {
     // console.log(user)
     const response = await fetch(
-      `http://localhost:8000/users/${userId}/friends`,
+      `https://exhibit-server.vercel.app//users/${userId}/friends`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
@@ -33,7 +33,7 @@ const AllConvosWidget = ({userId , onlineUsers}) => {
   };
 
   const getConvos = async () => {
-    const response = await fetch(`http://localhost:8000/conversations/${userId}` , {
+    const response = await fetch(`https://exhibit-server.vercel.app//conversations/${userId}` , {
         method : "GET",
         headers : { Authorization : `Bearer ${token}` }
     });

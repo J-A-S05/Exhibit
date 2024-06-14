@@ -15,7 +15,7 @@ const HomePage = () => {
 
   const socket = useRef()
   useEffect(() => {
-  socket.current = io("ws://localhost:8900")
+  socket.current = io("https://exhibit-socket.vercel.app/")
 } , [])
 
   useEffect(() => {

@@ -25,7 +25,7 @@ const UserWidget = ({ userId, picturePath }) => {
   const primaryDark = palette.primary.dark;
 
   const getUser = async () => {
-    const response = await fetch(`http://localhost:8000/users/${userId}`, {
+    const response = await fetch(`https://exhibit-server.vercel.app//users/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });

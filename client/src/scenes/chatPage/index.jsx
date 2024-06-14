@@ -30,7 +30,7 @@ const ChatPage = () => {
   
   const socket = useRef()
   useEffect(() => {
-  socket.current = io("ws://localhost:8900")
+  socket.current = io("https://exhibit-socket.vercel.app/")
   socket.current.on("getMessage", (data) => {
     setArrivalMessage({
       conversationId : convoId,
@@ -57,7 +57,7 @@ const ChatPage = () => {
 
   useEffect(() => {
     const getMessages = async () => {
-      const response = await fetch(`http://localhost:8000/messages/${convoId}` , {
+      const response = await fetch(`https://exhibit-server.vercel.app//messages/${convoId}` , {
         method : "GET",
         headers : {Authorization : `Bearer ${token}`}
       });

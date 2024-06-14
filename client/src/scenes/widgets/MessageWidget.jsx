@@ -47,7 +47,7 @@ const MessageWidget = ({ messages, socket }) => {
   // const ml = useSelector((state) => state.ml)
 
   // useEffect(() => {
-  //   socket.current = io("ws://localhost:8900")
+  //   socket.current = io("https://exhibit-socket.vercel.app/")
 
   // } , [])
   useEffect(() => {
@@ -61,7 +61,7 @@ const MessageWidget = ({ messages, socket }) => {
       sender: _id,
       text: text,
     };
-    const response = await fetch(`http://localhost:8000/messages`, {
+    const response = await fetch(`https://exhibit-server.vercel.app//messages`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newMessage),
@@ -71,7 +71,7 @@ const MessageWidget = ({ messages, socket }) => {
     setText("");
 
     const convo = await fetch(
-      `http://localhost:8000/conversations/byconvo/${convoId}`,
+      `https://exhibit-server.vercel.app//conversations/byconvo/${convoId}`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },

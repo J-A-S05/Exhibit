@@ -36,7 +36,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath , isPost , isOnline}
 
   const patchFriend = async () => {
     const response = await fetch(
-      `http://localhost:8000/users/${_id}/${friendId}`,
+      `https://exhibit-server.vercel.app//users/${_id}/${friendId}`,
       {
         method: "PATCH",
         headers: {

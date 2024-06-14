@@ -45,7 +45,7 @@ const ConvosWidget = ({ friendId, name, subtitle, userPicturePath , isOnline}) =
       receiverId : friendId
     }
     // const members = [_id , friendId]
-    const res = await fetch(`http://localhost:8000/conversations` , {
+    const res = await fetch(`https://exhibit-server.vercel.app//conversations` , {
 
         method: "POST",
         headers : {"Content-Type" : "application/json"},
@@ -60,7 +60,7 @@ const ConvosWidget = ({ friendId, name, subtitle, userPicturePath , isOnline}) =
   
   const handleChatClick = async () => {
     
-    const response = await fetch(`http://localhost:8000/conversations/find/${_id}/${friendId}` , {
+    const response = await fetch(`https://exhibit-server.vercel.app//conversations/find/${_id}/${friendId}` , {
       method : "GET",
       headers : {Authorization : `Bearer ${token}`}
     })
@@ -77,7 +77,7 @@ const ConvosWidget = ({ friendId, name, subtitle, userPicturePath , isOnline}) =
 
     }
 
-    const f = await fetch(`http://localhost:8000/users/${friendId}` , {
+    const f = await fetch(`https://exhibit-server.vercel.app//users/${friendId}` , {
       method : "GET",
       headers : {Authorization : `Bearer ${token}`}
     })

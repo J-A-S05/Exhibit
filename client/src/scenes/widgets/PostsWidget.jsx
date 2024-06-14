@@ -10,7 +10,7 @@ const PostsWidget = ({ UserId, isProfile }) => {
   const friends = useSelector((state) => state.user.friends);
 
   const getPosts = async () => {
-    const response = await fetch("http://localhost:8000/posts", {
+    const response = await fetch("https://exhibit-server.vercel.app//posts", {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -20,7 +20,7 @@ const PostsWidget = ({ UserId, isProfile }) => {
 
   const getUserPosts = async () => {
     const response = await fetch(
-      `http://localhost:8000/posts/${UserId}/posts`,
+      `https://exhibit-server.vercel.app//posts/${UserId}/posts`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
