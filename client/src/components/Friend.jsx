@@ -7,7 +7,9 @@ import FlexBetween from "./FlexBetween";
 import UserImage from "./UserImage";
 // import zIndex from "@mui/material/styles/zIndex";
 
+
 const Friend = ({ friendId, name, subtitle, userPicturePath , isPost , isOnline}) => {
+  const REACT_APP_SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { _id } = useSelector((state) => state.user);
@@ -36,7 +38,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath , isPost , isOnline}
 
   const patchFriend = async () => {
     const response = await fetch(
-      `https://exhibit-server.vercel.app//users/${_id}/${friendId}`,
+      `${REACT_APP_SERVER_BASE_URL}/users/${_id}/${friendId}`,
       {
         method: "PATCH",
         headers: {

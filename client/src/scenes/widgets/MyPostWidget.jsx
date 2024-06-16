@@ -25,7 +25,8 @@ import {
   import { useDispatch, useSelector } from "react-redux";
   import { setPosts } from "state";
   
-  const MyPostWidget = ({ userId , picturePath }) => {
+const MyPostWidget = ({ userId , picturePath }) => {
+    const REACT_APP_SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
     const dispatch = useDispatch();
     const [isImage, setIsImage] = useState(false);
     const [image, setImage] = useState(null);
@@ -48,7 +49,7 @@ import {
         formData.append("picturePath", image.name);
       }
   
-      const response = await fetch(`https://exhibit-server.vercel.app//posts`, {
+      const response = await fetch(`${REACT_APP_SERVER_BASE_URL}/posts`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
         body: formData,

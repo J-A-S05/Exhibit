@@ -7,7 +7,9 @@ import FriendListWidget from "scenes/widgets/FriendListWidget";
 import PostsWidget from "scenes/widgets/PostsWidget";
 import UserWidget from "scenes/widgets/UserWidget";
 
+
 const ProfilePage = () => {
+  const REACT_APP_SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
   const [user, setUser] = useState(null);
   const { userId } = useParams();
   const {_id} = useSelector((state) => state.user);
@@ -15,7 +17,7 @@ const ProfilePage = () => {
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
 
   const getUser = async () => {
-    const response = await fetch(`https://exhibit-server.vercel.app//users/${userId}`, {
+    const response = await fetch(`${REACT_APP_SERVER_BASE_URL}/users/${userId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });

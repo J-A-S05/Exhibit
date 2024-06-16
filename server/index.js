@@ -24,6 +24,7 @@ import { users, posts } from "./data/index.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 dotenv.config();
+const FRONTEND_URL = process.env.FRONTEND_URL;
 const app = express();
 app.use(express.json());
 app.use(helmet());
@@ -32,7 +33,7 @@ app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors(
-  {origin : ["https://exhibit-app-frontend.vercel.app/"],
+  {origin : FRONTEND_URL,
     methods : ["POST" , "GET" , "PATCH" , "DELETE"],
     credentials : true
   }

@@ -4,13 +4,14 @@ import { setPosts } from "state";
 import PostWidget from "./PostWidget";
 
 const PostsWidget = ({ UserId, isProfile }) => {
+  const REACT_APP_SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts);
   const token = useSelector((state) => state.token);
   const friends = useSelector((state) => state.user.friends);
 
   const getPosts = async () => {
-    const response = await fetch("https://exhibit-server.vercel.app//posts", {
+    const response = await fetch(`${REACT_APP_SERVER_BASE_URL}/posts`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -20,7 +21,7 @@ const PostsWidget = ({ UserId, isProfile }) => {
 
   const getUserPosts = async () => {
     const response = await fetch(
-      `https://exhibit-server.vercel.app//posts/${UserId}/posts`,
+      `${REACT_APP_SERVER_BASE_URL}/posts/${UserId}/posts`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },

@@ -8,7 +8,10 @@ import AllConvosWidget from 'scenes/widgets/AllConvosWidget';
 import { setConvoId , setMessages} from 'state';
 import {io} from 'socket.io-client'
 
+
 const ChatPage = () => {
+  const REACT_APP_SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
+  const REACT_APP_SOCKET_BASE_URL = process.env.REACT_APP_SOCKET_BASE_URL;
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
   const ml = useSelector((state) => state.ml);
   const user = useSelector((state) => state.user)
@@ -30,7 +33,7 @@ const ChatPage = () => {
   
   const socket = useRef()
   useEffect(() => {
-  socket.current = io("https://exhibit-socket.vercel.app/")
+  socket.current = io(`${REACT_APP_SOCKET_BASE_URL}`)
   socket.current.on("getMessage", (data) => {
     setArrivalMessage({
       conversationId : convoId,
@@ -57,7 +60,7 @@ const ChatPage = () => {
 
   useEffect(() => {
     const getMessages = async () => {
-      const response = await fetch(`https://exhibit-server.vercel.app//messages/${convoId}` , {
+      const response = await fetch(`${REACT_APP_SERVER_BASE_URL}/messages/${convoId}` , {
         method : "GET",
         headers : {Authorization : `Bearer ${token}`}
       });

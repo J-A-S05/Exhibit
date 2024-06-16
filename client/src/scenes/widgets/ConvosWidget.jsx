@@ -10,7 +10,9 @@ import { useEffect } from "react";
 import { setActiveChatFriend } from "state";
 
 
+
 const ConvosWidget = ({ friendId, name, subtitle, userPicturePath , isOnline}) => {
+  const REACT_APP_SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
   const dispatch = useDispatch();
 
   const { _id } = useSelector((state) => state.user);
@@ -45,7 +47,7 @@ const ConvosWidget = ({ friendId, name, subtitle, userPicturePath , isOnline}) =
       receiverId : friendId
     }
     // const members = [_id , friendId]
-    const res = await fetch(`https://exhibit-server.vercel.app//conversations` , {
+    const res = await fetch(`${REACT_APP_SERVER_BASE_URL}/conversations` , {
 
         method: "POST",
         headers : {"Content-Type" : "application/json"},
@@ -60,7 +62,7 @@ const ConvosWidget = ({ friendId, name, subtitle, userPicturePath , isOnline}) =
   
   const handleChatClick = async () => {
     
-    const response = await fetch(`https://exhibit-server.vercel.app//conversations/find/${_id}/${friendId}` , {
+    const response = await fetch(`${REACT_APP_SERVER_BASE_URL}/conversations/find/${_id}/${friendId}` , {
       method : "GET",
       headers : {Authorization : `Bearer ${token}`}
     })
@@ -77,7 +79,7 @@ const ConvosWidget = ({ friendId, name, subtitle, userPicturePath , isOnline}) =
 
     }
 
-    const f = await fetch(`https://exhibit-server.vercel.app//users/${friendId}` , {
+    const f = await fetch(`${REACT_APP_SERVER_BASE_URL}/users/${friendId}` , {
       method : "GET",
       headers : {Authorization : `Bearer ${token}`}
     })

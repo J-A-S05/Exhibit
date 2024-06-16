@@ -5,7 +5,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setFriends } from "state";
 
+
 const FriendListWidget = ({ userId , onlineUsers}) => {
+  const REACT_APP_SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
   const dispatch = useDispatch();
   const { palette } = useTheme();
   const token = useSelector((state) => state.token);
@@ -13,7 +15,7 @@ const FriendListWidget = ({ userId , onlineUsers}) => {
 
   const getFriends = async () => {
     const response = await fetch(
-      `https://exhibit-server.vercel.app//users/${userId}/friends`,
+      `${REACT_APP_SERVER_BASE_URL}/users/${userId}/friends`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
