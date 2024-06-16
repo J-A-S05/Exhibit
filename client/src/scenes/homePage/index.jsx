@@ -8,14 +8,16 @@ import FriendListWidget from "scenes/widgets/FriendListWidget";
 import { useState , useEffect , useRef} from "react";
 import {io} from 'socket.io-client'
 
+
 const HomePage = () => {
+  const REACT_APP_SOCKET_BASE_URL = process.env.REACT_APP_SOCKET_BASE_URL;
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
   const {_id , picturePath} = useSelector((state) => state.user);
   const [onlineUsers , setOnlineUsers] = useState([]);
 
   const socket = useRef()
   useEffect(() => {
-  socket.current = io("ws://localhost:8900")
+  socket.current = io(`${REACT_APP_SOCKET_BASE_URL}`)
 } , [])
 
   useEffect(() => {

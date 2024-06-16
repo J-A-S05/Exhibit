@@ -24,6 +24,7 @@ import { users, posts } from "./data/index.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 dotenv.config();
+const FRONTEND_URL = process.env.FRONTEND_URL;
 const app = express();
 app.use(express.json());
 app.use(helmet());
@@ -31,7 +32,13 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors());
+app.use(cors(
+  {origin : FRONTEND_URL,
+    methods : ["POST" , "GET" , "PATCH" , "DELETE"],
+    credentials : true
+  }
+  
+));
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 /* FILE STORAGE */
@@ -65,7 +72,7 @@ mongoose
     // useUnifiedTopology: true,
   })
   .then(() => {
-    app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
+    app.listen(PORT, () => {console.log(`Server Port: ${PORT}`); console.log( `db : ${DB_URL}`)});
 
     /* ADD DATA ONE TIME */
     // User.insertMany(users);

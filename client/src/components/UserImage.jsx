@@ -1,6 +1,8 @@
 import { Box } from "@mui/material";
 
+
 const UserImage = ({ image, size = "60px" }) => {
+  const REACT_APP_SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
   return (
     <Box width={size} height={size}>
       <img
@@ -8,7 +10,7 @@ const UserImage = ({ image, size = "60px" }) => {
         width={size}
         height={size}
         alt="user"
-        src={`http://localhost:8000/assets/${image}`}
+        src={`${REACT_APP_SERVER_BASE_URL}/assets/${image}`}
       />
     </Box>
   );

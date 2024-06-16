@@ -8,7 +8,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setFriends , setConvos } from "state";
 
+
 const AllConvosWidget = ({userId , onlineUsers}) => {
+  const REACT_APP_SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user)
   const { palette } = useTheme();
@@ -22,7 +24,7 @@ const AllConvosWidget = ({userId , onlineUsers}) => {
   const getFriends = async () => {
     // console.log(user)
     const response = await fetch(
-      `http://localhost:8000/users/${userId}/friends`,
+      `${REACT_APP_SERVER_BASE_URL}/users/${userId}/friends`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
@@ -33,7 +35,7 @@ const AllConvosWidget = ({userId , onlineUsers}) => {
   };
 
   const getConvos = async () => {
-    const response = await fetch(`http://localhost:8000/conversations/${userId}` , {
+    const response = await fetch(`${REACT_APP_SERVER_BASE_URL}/conversations/${userId}` , {
         method : "GET",
         headers : { Authorization : `Bearer ${token}` }
     });

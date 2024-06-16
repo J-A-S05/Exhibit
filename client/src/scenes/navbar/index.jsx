@@ -26,7 +26,9 @@ import { useNavigate } from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
 import { setConvoId, setMessages } from "state";
 
+
 const Navbar = () => {
+  const REACT_APP_SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -52,7 +54,7 @@ const Navbar = () => {
   const handleSearchClick = async () => {
     const arr = text.split(" ")
     const username = arr[0] + '_' + arr[1];
-    const response = await fetch(`http://localhost:8000/users/${username}/byusername` , {
+    const response = await fetch(`${REACT_APP_SERVER_BASE_URL}/users/${username}/byusername` , {
       method : "GET",
       headers : {Authorization: `Bearer ${token}`}
     });

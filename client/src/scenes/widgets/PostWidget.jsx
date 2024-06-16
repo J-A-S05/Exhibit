@@ -24,6 +24,7 @@ import Picker from "@emoji-mart/react";
 import { useNavigate } from "react-router-dom";
 import { blue, red } from "@mui/material/colors";
 
+
 const PostWidget = ({
   postId,
   postUserId,
@@ -35,6 +36,7 @@ const PostWidget = ({
   likes,
   comments,
 }) => {
+  const REACT_APP_SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
   const [isComments, setIsComments] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -50,7 +52,7 @@ const PostWidget = ({
   const primary = palette.primary.main;
 
   const patchLike = async () => {
-    const response = await fetch(`http://localhost:8000/posts/${postId}/like`, {
+    const response = await fetch(`${REACT_APP_SERVER_BASE_URL}/posts/${postId}/like`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -63,7 +65,7 @@ const PostWidget = ({
   };
 
   const sendMessage = async () => {
-    const user = await fetch(`http://localhost:8000/users/${loggedInUserId}`, {
+    const user = await fetch(`${REACT_APP_SERVER_BASE_URL}/users/${loggedInUserId}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -71,7 +73,7 @@ const PostWidget = ({
     const userData = await user.json();
 
     const response = await fetch(
-      `http://localhost:8000/posts/${postId}/comment`,
+      `${REACT_APP_SERVER_BASE_URL}/posts/${postId}/comment`,
       {
         method: "PATCH",
         headers: {
@@ -119,7 +121,7 @@ const PostWidget = ({
           height="auto"
           alt="post"
           style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }}
-          src={`http://localhost:8000/assets/${picturePath}`}
+          src={`${REACT_APP_SERVER_BASE_URL}/assets/${picturePath}`}
         />
       )}
       <FlexBetween mt="0.25rem">
