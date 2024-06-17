@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
-    "build" : "echo \"No build step required\""
+    "build" : "echo \"No build step required\" && exit 1"
   },
   "author": "eddie",
   "license": "ISC",
