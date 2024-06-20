@@ -89,7 +89,7 @@ const ConvosWidget = ({ friendId, name, subtitle, userPicturePath , isOnline}) =
 
     dispatch(setActiveChatFriend({friend}))
     
-    console.log(activefriend)
+    // console.log(activefriend)
   }
 
   return (

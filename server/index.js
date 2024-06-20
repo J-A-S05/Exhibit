@@ -33,7 +33,7 @@ app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 const allowedOrigins = [
-  FRONTEND_URL, "http://localhost:3000"// Add other origins if needed
+  FRONTEND_URL, "http://localhost:3000" , "https://exhibit-client-rend.onrender.com"// Add other origins if needed
 ];
 
 const corsOptions = {
