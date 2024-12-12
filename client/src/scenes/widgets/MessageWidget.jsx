@@ -25,7 +25,9 @@ import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 import UserImage from "components/UserImage";
 
+
 const MessageWidget = ({ messages, socket }) => {
+  const REACT_APP_SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
   // const socket = useRef()
   const scrollRef = useRef();
   const navigate = useNavigate();
@@ -47,7 +49,7 @@ const MessageWidget = ({ messages, socket }) => {
   // const ml = useSelector((state) => state.ml)
 
   // useEffect(() => {
-  //   socket.current = io("ws://localhost:8900")
+  //   socket.current = io("REACT_APP_SOCKET_BASE_URL_URL")
 
   // } , [])
   useEffect(() => {
@@ -61,7 +63,7 @@ const MessageWidget = ({ messages, socket }) => {
       sender: _id,
       text: text,
     };
-    const response = await fetch(`http://localhost:8000/messages`, {
+    const response = await fetch(`${REACT_APP_SERVER_BASE_URL}/messages`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newMessage),
@@ -71,7 +73,7 @@ const MessageWidget = ({ messages, socket }) => {
     setText("");
 
     const convo = await fetch(
-      `http://localhost:8000/conversations/byconvo/${convoId}`,
+      `${REACT_APP_SERVER_BASE_URL}/conversations/byconvo/${convoId}`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
