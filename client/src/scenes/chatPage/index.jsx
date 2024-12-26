@@ -94,16 +94,19 @@ const ChatPage = () => {
         {/* PARTICULAR CONVO */}
         
 
-        {convoId ? <Box
-          flexBasis={isNonMobileScreens ? "60%" : undefined}
-          mt={isNonMobileScreens ? undefined : "2rem"}
-          height= "100px" 
-        >
-        {messages.length !== 0 && (
-          <MessageWidget messages = {allMessages} socket = {socket} />
-        )}
-        </Box> : 
-        <Typography>No conversation yet!</Typography>}
+        {convoId ? (
+  <Box
+    flexBasis={isNonMobileScreens ? "60%" : undefined}
+    mt={isNonMobileScreens ? undefined : "2rem"}
+    height="100px" 
+  >
+    {messages.length !== 0 && (
+      <MessageWidget messages={allMessages} socket={socket} />
+    )}
+  </Box>
+) : (
+  <Typography>No conversation yet!</Typography>
+)}
         
 
         
